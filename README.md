@@ -18,7 +18,7 @@ Some security features/measures is:
 * Digital signatures using elliptical curves.
 
 ## ECDH
-The client that creates the chatroom is elected "key hub". The key hub is responsible for creating a Fernet key which will be used by all parties. Each client that now connects to the chat room does a key exchange with the key hub using elliptic curve diffie-hellman to negotiate over a shared key. The shared key is then used by the hub to encrypt the Fernet key by using AES-CBC mode. The client then decrypts the Fernet key by using the shared key. Both parties now shares the same Fernet key and can exchange messages without any interception. 
+The client that creates the chatroom is elected "key hub". The key hub is responsible for creating a Fernet key which will be used by all parties. Each client that now connects to the chat room does a key exchange with the key hub using elliptic curve diffie-hellman to negotiate a shared key. The shared key is then used by the hub to encrypt the Fernet key by using AES-CBC mode. The client then decrypts the Fernet key by using the shared key. Both parties now shares the same Fernet key and can exchange messages without any interception. 
 
 If the key hub exits the chat a new hub is elected, and no further action is needed as the client already has the Fernet key.
 
