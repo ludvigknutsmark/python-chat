@@ -25,7 +25,7 @@ If the key hub exits the chat a new hub is elected, and no further action is nee
 ## Security issues
 Those that I know of:
 * When a server verifies a client the client first sends it public key to the server. This is obviously wrong. A solution would be a login/register for clients which would generate a public key put in a database that the server would check with each challenge.
-* The SSL certificate verification from the client has a callback function that is not implemented. Further resaerch is essential for this to be OK.
+* The SSL certificate verification from the client has a callback function that is not implemented. Further research is essential for this to be OK.
 
 ## Usage
 Before connecting to a server the user has to create a password. This password is for encrypting the PEM encoded elliptic curve private key used in digital signatures.
