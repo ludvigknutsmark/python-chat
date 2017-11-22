@@ -5,6 +5,8 @@ A basic example of a chat application which supports groups up to 10 people for 
 
 Huge shoutout to Cryptography.io and pyOpenSSL for amazing libraries and documentation!
 
+If you want to download and test this application for yourself, email me at ludvig.knutsmark@gmail.com
+
 Some security features/measures is:
 
 * End-to-end encrypted message between clients using Fernet, which is a method that builds upon AES-128-CBC mode and a SHA256 hash authentication code (HMAC).
