@@ -10,6 +10,8 @@ from cryptography.hazmat.primitives.serialization import load_pem_public_key
 from messencrypt import encrypt
 from messencrypt import generateFernetKey
 
+#Creates the private/public key pair for the server and gets the shared key from the client public key.
+#Puts the shared key through a KDF for AES-128.
 def hubExchange(client_public, fernet_key):
     #Generate a private key for use in the exchange
     hub_private = ec.generate_private_key(
@@ -36,8 +38,8 @@ def hubExchange(client_public, fernet_key):
     return sendKeyToClient(hub_shared, fernet_key, serialized_hub_public, salt)
 
 
+#Encrypts the fernet key with the shared key
 def sendKeyToClient(shared_key, fernet_key, serialized_hub_public, salt):
-
     iv = os.urandom(16)
     cipher = Cipher(algorithms.AES(shared_key), modes.CBC(iv), backend=default_backend())
     encryptor = cipher.encryptor()
@@ -46,7 +48,7 @@ def sendKeyToClient(shared_key, fernet_key, serialized_hub_public, salt):
     json_string = {"hub_public": serialized_hub_public, "ciphertext": base64.b64encode(ct), "iv": base64.b64encode(iv), "salt": base64.b64encode(salt)}
     return json.dumps(json_string)
 
-
+#Decrypts the fernet key with the shared key
 def getKeyFromHub(client_private, public_cipher_iv):
     parsed = json.loads(public_cipher_iv)
 
@@ -57,7 +59,7 @@ def getKeyFromHub(client_private, public_cipher_iv):
 
     hub_public = load_pem_public_key(hub_serialized, backend=default_backend())
     shared_key = client_private.exchange(ec.ECDH(), hub_public)
-    #The shared key needs to be 16 bytes (AES blocksize). So it's put through a KDF
+    #The shared key needs to be 16 bytes (AES-128). So it's put through a KDF with the same salt as the server
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
         length=16,
@@ -72,6 +74,7 @@ def getKeyFromHub(client_private, public_cipher_iv):
     fernet = decryptor.update(ct) + decryptor.finalize()
     return fernet
 
+#Create private/public elliptic curve key pair.
 def clientCreateKeys():
     private_key = ec.generate_private_key(ec.SECP384R1(), default_backend())
     serialized_private = private_key.private_bytes(
@@ -89,6 +92,7 @@ def clientCreateKeys():
     )
     return serialized_public
 
+#DH exchange from the client point of view. Is written in order.
 def diffieHellmanExchange(s, fernet_key):
     dhDone = False
     while dhDone == False:
