@@ -1,6 +1,7 @@
 from OpenSSL import crypto
 from createCert import *  
 
+#modified examples from pyOpenSSL examples
 def createCA():
     cakey = createKeyPair(TYPE_RSA, 2048)
     careq = createCertRequest(cakey, CN='Certificate Authority')
