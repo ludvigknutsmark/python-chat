@@ -2,7 +2,7 @@ import sys, socket, select, os
 from mk_cert_files import *
 from OpenSSL import SSL
 
-
+#Creates a certificate request and sends it as a PEM encoded string to the CA/server
 def getCertificate():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.settimeout(2)
@@ -22,7 +22,7 @@ def getCertificate():
     cert = crypto.load_certificate(crypto.FILETYPE_PEM, cert_to_be_parsed)
     open('client.cert', 'w').write(crypto.dump_certificate(crypto.FILETYPE_PEM, cert))
     
-
+#Sets up the SSL socket with the client keys. 
 def initSSLClient(port):
     ctx = SSL.Context(SSL.SSLv23_METHOD)
     ctx.set_verify(SSL.VERIFY_PEER, verify_cb)
