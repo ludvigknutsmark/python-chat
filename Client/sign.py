@@ -5,13 +5,12 @@ from cryptography.hazmat.primitives import serialization
 
 import json, sys, base64
 import getpass
-# -*- coding: utf-8 -*-
 
 def createSignature(pathToPrivateKey, prehashed):
     file = open(pathToPrivateKey, "r")
     serialized_private = ''.join(file.readlines())
-
-    password = getpass.getpass("Enter your password>")
+    #The password set by the user
+    password = getpass.getpass("Enter your key password>")
     try:
         private_key = serialization.load_pem_private_key(
         serialized_private,
@@ -28,6 +27,7 @@ def createSignature(pathToPrivateKey, prehashed):
         print "Wrong password."
         return createSignature(pathToPrivateKey, prehashed)
 
+#Verifies the signed message sent from the client
 def verifySignature(serialized_public, signature, prehashed):
     public_key = serialization.load_pem_public_key(
         serialized_public,
@@ -40,6 +40,7 @@ def verifySignature(serialized_public, signature, prehashed):
     except:
         return False
 
+#Creates private/public elliptic curve key pair. 
 def createSerializedKeys(password):
     private_key = ec.generate_private_key(ec.SECP384R1(), default_backend())
     serialized_private = private_key.private_bytes(
@@ -59,10 +60,10 @@ def createSerializedKeys(password):
     file.write(serialized_public)
     file.close()
 
+#Sign the message sent by the server. 
 def signMessage(s, username, password):
     unparsed = s.recv(4096)
     data = json.loads(unparsed)
-    #Could be wrapped in a try-catch but whatever
     if not data :
         print '\nDisconnected from chat server'
         sys.exit()
