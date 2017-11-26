@@ -1,5 +1,7 @@
 from OpenSSL import crypto
 
+
+#This code is taken from pyOpenSSL examples. 
 TYPE_RSA = crypto.TYPE_RSA
 TYPE_DSA = crypto.TYPE_DSA
 
