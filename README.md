@@ -1,7 +1,7 @@
 # Python chat
 
 ## Introduction
-A basic example of a chat application which supports groups up to 10 people for each room. The goals of this project was to gain knowledge and experience in implementing encryption, diffie-hellman key exchange, digital signatures and SSL certificates into an Python application. This application is NOT(!!!!) meant for production, therefore the GUI is ugly and very simplified and some huge security details are simplified.
+A basic example of a chat application which supports groups up to 10 people for each room. The goals of this project was to gain knowledge and experience in implementing encryption, diffie-hellman key exchange, digital signatures and SSL certificates into an Python application. This application is NOT(!!!!) meant for production or the sending of any sensitive data, therefore the GUI is ugly and very simplified and some huge security details are overlooked, see security issues for details.
 
 Huge shoutout to Cryptography.io and pyOpenSSL for great libraries and documentation!
 
