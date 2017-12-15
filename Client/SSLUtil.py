@@ -24,7 +24,7 @@ def getCertificate():
     
 #Sets up the SSL socket with the client keys. 
 def initSSLClient(port):
-    ctx = SSL.Context(SSL.SSLv23_METHOD)
+    ctx = SSL.Context(SSL.TLSv1_2_METHOD)
     ctx.set_verify(SSL.VERIFY_PEER, verify_cb)
     ctx.use_privatekey_file (os.path.join('keys', 'client.pkey'))
     ctx.use_certificate_file(os.path.join('', 'client.cert'))
