@@ -264,7 +264,7 @@ def electNewHub(socket_list, server_socket):
 def initSSL():
     # Initialize context
     #Could be a function from SSLutils.
-    ctx = SSL.Context(SSL.SSLv23_METHOD)
+    ctx = SSL.Context(SSL.TLSv1_2_METHOD)
     ctx.set_options(SSL.OP_NO_SSLv2)
     ctx.set_verify(SSL.VERIFY_PEER|SSL.VERIFY_FAIL_IF_NO_PEER_CERT, verify_cb)
     ctx.use_privatekey_file (os.path.join('keys', 'server.pkey'))
