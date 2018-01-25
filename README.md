@@ -31,7 +31,7 @@ Those that I know of:
 Before connecting to a server the user has to create a password. This password is for encrypting the PEM encoded elliptic curve private key used in digital signatures.
 When first connecting to the server a menu is presented with several choices. Here you can choose between creating a new chat room, joining a chat room by name and getting a list of all chat rooms currently active.
 
-The rest of the implemenation details is commented in the code.
+The rest of the implementation details is commented in the code.
 
 
 ## Snapshots
