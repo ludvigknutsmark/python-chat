@@ -3,10 +3,6 @@
 ## Introduction
 A basic example of a chat application which supports groups up to 10 people for each room. The goals of this project was to gain knowledge and experience in implementing encryption, diffie-hellman key exchange, digital signatures and SSL certificates into an Python application. This application is NOT(!!!!) meant for production or the sending of any sensitive data, therefore the GUI is ugly and very simplified and some huge security details are overlooked, see security issues for details.
 
-Huge shoutout to Cryptography.io and pyOpenSSL for great libraries and documentation!
-
-If you want to download and test this application for yourself, email me at ludvig.knutsmark@gmail.com
-
 Some security features/measures is:
 
 * End-to-end encrypted message between clients using Fernet, which is a method that builds upon AES-128-CBC mode and a SHA256 hash authentication code (HMAC).
